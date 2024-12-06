@@ -1,15 +1,16 @@
 package londrinaMoney;
 
 import java.util.ArrayList;
-
+// A tal classe abstrata
 public abstract class Contas {
-    protected String documentoRG;
-    protected String documentoCPF;
-    protected String comprovanteResidencia;
-    protected double dinheiro;
-    protected int idade;
-    protected ArrayList<String> extrato;
+    protected String documentoRG; // Não é utilizado, mas decidi adicionar
+    protected String documentoCPF; // Não é utilizado, mas decidi adicionar
+    protected String comprovanteResidencia; // Não é utilizado, mas decidi adicionar
+    protected double dinheiro; // Criação do dinheiro em comum entre as clases
+    protected int idade; // Não é utilizado, mas decidi adicionar
+    protected ArrayList<String> extrato; // Criação do extrato, comum entre as classes
 
+    // Criação do esqueleto de cada metodo, que sera utilizado depois
     public abstract void efetuarSaque();
 
     public abstract void efetuarDeposito();
