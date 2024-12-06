@@ -7,6 +7,7 @@ public class ContaPoupanca extends Contas{
     protected int quantidadeSaques;
     protected int quantidadeTranferencias;
     protected int quantidadeExtratos;
+    protected double transferencia;
 
     public ContaPoupanca(String documentoRG, String documentoCPF, String comprovanteResidencia, int idade) {
         this.documentoRG = documentoRG;
@@ -19,6 +20,9 @@ public class ContaPoupanca extends Contas{
         this.quantidadeTranferencias = 0;
         this.quantidadeExtratos = 0;
     }
+
+    ContaPoupanca contaPoup = new ContaPoupanca("456", "111.111.111-00", "Conta de Água", 21);
+    ContaCorrente contaCorr = new ContaCorrente("123", "000.000.000-00", "Conta de Luz", 19, "Salário");
 
     @Override
     public void efetuarSaque() {
@@ -62,9 +66,12 @@ public class ContaPoupanca extends Contas{
                 System.out.println("Insira o valor a ser transferido: ");
                 double verificarDinheiro = input2.nextDouble();
                 if (verificarDinheiro <= this.dinheiro) {
+                    double transacao = contaCorr.getDinheiro();
                     this.dinheiro -= verificarDinheiro;
+                    transferencia = contaCorr.getDinheiro() + verificarDinheiro;
                     String dinheiroExtrato = String.valueOf(this.dinheiro);
                     extrato.add("Foram transferidos R$" + dinheiroExtrato);
+                    contaCorr.setDinheiro(transferencia);
                     quantidadeTranferencias += 1;
                 } else {
                     System.out.println("Você não consegue sacar essa quantidade de dinheiro," +

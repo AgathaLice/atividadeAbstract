@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class ContaCorrente extends Contas{
     protected String comprovanteRenda;
+    protected double transferencia;
 
     public ContaCorrente(String documentoRG, String documentoCPF, String comprovanteResidencia, int idade, String comprovanteRenda){
         this.documentoRG = documentoRG;
@@ -14,6 +15,9 @@ public class ContaCorrente extends Contas{
         this.comprovanteRenda = comprovanteRenda;
         this.extrato = new ArrayList<>();
     }
+
+    ContaPoupanca contaPoup = new ContaPoupanca("456", "111.111.111-00", "Conta de Água", 21);
+    ContaCorrente contaCorr = new ContaCorrente("123", "000.000.000-00", "Conta de Luz", 19, "Salário");
 
     @Override
     public void efetuarSaque() {
@@ -45,7 +49,24 @@ public class ContaCorrente extends Contas{
 
     @Override
     public void efetuarTransferencia() {
-
+        if (this.dinheiro >= 0) {
+            Scanner input2 = new Scanner(System.in);
+            System.out.println("Insira o valor a ser transferido: ");
+            double verificarDinheiro = input2.nextDouble();
+            if (verificarDinheiro <= this.dinheiro) {
+                double transacao = contaPoup.getDinheiro();
+                this.dinheiro -= verificarDinheiro;
+                transferencia = contaPoup.getDinheiro() + verificarDinheiro;
+                String dinheiroExtrato = String.valueOf(this.dinheiro);
+                extrato.add("Foram transferidos R$" + dinheiroExtrato);
+                contaPoup.setDinheiro(transferencia);
+            } else {
+                System.out.println("Você não consegue sacar essa quantidade de dinheiro," +
+                        " não há o bastante na conta. Você têm: R$" + String.valueOf(this.dinheiro));
+            }
+        } else {
+            System.out.println("Você não consegue sacar essa quantidade de dinheiro, você não tem nada na conta");
+        }
     }
 
     @Override
